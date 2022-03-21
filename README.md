@@ -1,5 +1,9 @@
 async_notify
 
+| CI / CD | ビルドステータス |
+|---|---|
+| Github Actions | [![Github Actions](https://github.com/vivitainc/flutter_async_notify/actions/workflows/flutter-package-test.yaml/badge.svg)](https://github.com/vivitainc/flutter_async_notify/actions/workflows/flutter-package-test.yaml) |
+
 ## Features
 
 Notify(wait-notify) support Library.
@@ -8,14 +12,6 @@ Notify(wait-notify) support Library.
     Message(Object)の非同期待ち合わせ.
 * NotifyChannel
     非同期の値送信/待ち合わせ.
-
-## Getting started
-
-TODO.
-
-```yaml
-# pubspec.yaml
-```
 
 ## Usage
 
