@@ -1,8 +1,7 @@
-name: async_plus
-description: utilities for async functions.
+name: async_notify
+description: Notify wait/notify library.
 version: 0.0.1
-homepage: https://github.com/vivitainc/flutter_async_plus
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+homepage: https://github.com/vivitainc/async_notify
 
 environment:
   sdk: ">=2.15.1 <3.0.0"

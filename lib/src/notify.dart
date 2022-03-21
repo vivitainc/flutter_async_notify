@@ -18,23 +18,6 @@ class Notify {
   /// Notify.dispose()が呼び出されていない状態であればtrueを返却する.
   bool get isClosed => _subject.isClosed;
 
-  void _assertNotDisposed(
-    dynamic value, {
-    String message = 'Notify.dispose() called',
-  }) {
-    if (value == _NotifyMessage.dispose || _subject.isClosed) {
-      throw CancellationException(message);
-    }
-  }
-
-  void _assertNotClosed({
-    String message = 'Notify.dispose() called',
-  }) {
-    if (_subject.isClosed) {
-      throw CancellationException(message);
-    }
-  }
-
   /// 指定時間処理を停止する.
   /// dispose()が発行された場合、その時点で [CancellationException] を発行して呼び出し元へ戻る.
   Future delay(final Duration duration) async {
@@ -55,6 +38,24 @@ class Notify {
     _assertNotClosed();
   }
 
+  /// Notifyを終了する.
+  /// 現在待ち合わせているリソースはすべてCancelが発行される.
+  Future dispose() {
+    if (isClosed) {
+      return Future<void>.value(null);
+    }
+    _subject.add(_NotifyMessage.dispose);
+    return _subject.close();
+  }
+
+  /// wait()しているオブジェクトの動作を再開する
+  void notify() {
+    if (isClosed) {
+      return;
+    }
+    _subject.add(_NotifyMessage.notify);
+  }
+
   /// 何らかのNotify()が発行されるまで待ち合わせる.
   ///
   /// [message] を指定すると、例外設定に利用される
@@ -71,22 +72,21 @@ class Notify {
     _assertNotClosed(message: message);
   }
 
-  /// wait()しているオブジェクトの動作を再開する
-  void notify() {
-    if (isClosed) {
-      return;
+  void _assertNotClosed({
+    String message = 'Notify.dispose() called',
+  }) {
+    if (_subject.isClosed) {
+      throw CancellationException(message);
     }
-    _subject.add(_NotifyMessage.notify);
   }
 
-  /// Notifyを終了する.
-  /// 現在待ち合わせているリソースはすべてCancelが発行される.
-  void dispose() {
-    if (isClosed) {
-      return;
+  void _assertNotDisposed(
+    dynamic value, {
+    String message = 'Notify.dispose() called',
+  }) {
+    if (value == _NotifyMessage.dispose || _subject.isClosed) {
+      throw CancellationException(message);
     }
-    _subject.add(_NotifyMessage.dispose);
-    _subject.close();
   }
 }
 
