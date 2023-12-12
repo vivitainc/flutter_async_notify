@@ -6,7 +6,6 @@ class CancellationException implements Exception {
 
   @override
   String toString() {
-    // ignore: no_runtimetype_tostring
-    return '$runtimeType{message: $message}';
+    return 'CancellationException(message: $message)';
   }
 }
