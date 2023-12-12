@@ -1,11 +1,11 @@
 name: async_notify
 description: Notify wait/notify library.
-version: 0.0.1+1
+version: 0.0.2
 homepage: https://github.com/vivitainc/flutter_async_notify
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
-  flutter: ">=2.8.1"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ^3.0.0
 
 dependencies:
   flutter:
